@@ -64,6 +64,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo "Deployment stage"
+                // Lab 8 - Feature toggle
+                sh 'kubectl -n jperry apply -f ./afs-labs-student/kubernetes/config-map.yaml'
                 //("Lab 5 - Deploy to EKS"): deploy docker image
                 sh 'kubectl -n jperry set image deployment/app-deployment app-deployment=$HARBOR_REGISTRY/$HARBOR_PROJECT/$APP_IMAGE_NAME:$COMMIT_HASH-$PIPELINE_HASH'
             }
